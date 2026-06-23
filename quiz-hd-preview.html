@@ -329,13 +329,6 @@ main {
 }
 .option-btn.wrong .option-letter { background: var(--red); border-color: var(--red); color: #fff; }
 
-.option-btn.reveal-correct {
-  border-color: var(--green);
-  background: rgba(76,175,80,0.06);
-  color: #81c784;
-}
-.option-btn.reveal-correct .option-letter { background: var(--green); border-color: var(--green); color: #000; }
-
 .option-btn:disabled { cursor: default; }
 
 .result-icon {
@@ -537,21 +530,22 @@ const CONFIG = {
     {
       text: "In quale anno Harley-Davidson fu fondata?",
       options: ["1895", "1903", "1910", "1920"],
-      correct: 1
+      c: "OA=="
     },
     {
       text: "Come si chiama il motore V-Twin da 117 cubic inch di Harley-Davidson?",
       options: ["Twin Cam", "Revolution Max", "Milwaukee-Eight 117", "Screamin' Eagle"],
-      correct: 2
+      c: "OQ=="
     },
     {
       text: "In quale città americana ha sede la Harley-Davidson?",
       options: ["Chicago", "Detroit", "Milwaukee", "Cincinnati"],
-      correct: 2
+      c: "OQ=="
     }
   ]
 };
 CONFIG.minCorrect = CONFIG.questions.length;
+function decodeAnswer(c) { return parseInt(atob(c), 10) - 7; }
 // ============================================================
 
 const letters = ['A','B','C','D'];
@@ -586,7 +580,7 @@ function renderQuestions() {
 
 function answer(qi, oi) {
   if (answered[qi] !== undefined) return;
-  const isCorrect = oi === CONFIG.questions[qi].correct;
+  const isCorrect = oi === decodeAnswer(CONFIG.questions[qi].c);
   answered[qi] = isCorrect;
   answeredCount++;
 
@@ -603,7 +597,6 @@ function answer(qi, oi) {
     btn.disabled = true;
     if (i === oi && isCorrect)  { btn.classList.add('correct'); icon.textContent = '✓'; }
     else if (i === oi)          { btn.classList.add('wrong');   icon.textContent = '✗'; }
-    else if (i === CONFIG.questions[qi].correct) { btn.classList.add('reveal-correct'); icon.textContent = '✓'; }
   }
 
   updateProgress();
