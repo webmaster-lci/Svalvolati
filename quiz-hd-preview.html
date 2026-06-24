@@ -105,6 +105,10 @@ header {
   text-transform: uppercase;
 }
 
+#percorso-label {
+  color: var(--orange);
+}
+
 /* Orange bottom stripe */
 .header-stripe {
   height: 4px;
@@ -502,7 +506,7 @@ main {
 
 <div class="progress-section">
   <div class="progress-meta">
-    <span>Avanzamento</span>
+    <span>Avanzamento &ndash; <span id="percorso-label">Percorso 1</span></span>
     <span class="count" id="progressLabel">1 / 3</span>
   </div>
   <div class="progress-track">
@@ -516,7 +520,6 @@ main {
   <div class="chrome-bar"></div>
 </main>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 // ============================================================
 //  ⚙️  CONFIGURAZIONE
@@ -629,17 +632,14 @@ function showResult() {
           <div class="score-dots">${dots}</div>
           <div class="qr-section">
             <p class="qr-label">📍 Percorso GPS</p>
-            <div class="qr-wrapper" id="qr-container"></div>
+            <div class="qr-wrapper">
+              <img src="data:image/png;base64,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" alt="QR Code percorso" style="width:200px;height:200px;display:block;">
+            </div>
             <p class="qr-hint">📷 Punta la fotocamera sul QR code</p>
           </div>
           <button class="retry-btn" onclick="resetQuiz()">↺ Ricomincia</button>
         </div>
       </div>`;
-    new QRCode(document.getElementById('qr-container'), {
-      text: CONFIG.gpxUrl, width: 200, height: 200,
-      colorDark: '#000000', colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.M
-    });
   } else {
     sec.innerHTML = `
       <div class="result-card">
