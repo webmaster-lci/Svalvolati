@@ -488,110 +488,44 @@ main {
 }
 
 
-/* ══════════════ SCHERMATA SQUADRA ══════════════ */
-#squad-screen {
-  min-height: 100vh;
-  background: var(--black);
-  padding: 0 0 40px;
-}
-
-.squad-section-title {
+/* ══ SCHERMATA SQUADRA ══ */
+#squad-screen { background: var(--black); }
+#quiz-main { display: none; }
+.squad-wrap { padding: 16px; max-width: 520px; margin: 0 auto; }
+.squad-label {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 3px;
-  color: var(--chrome2);
-  text-transform: uppercase;
-  margin-bottom: 14px;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 3px;
+  color: var(--chrome2); text-transform: uppercase; margin-bottom: 12px;
 }
-
-.squad-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 24px;
-}
-
+.squad-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
 .squad-btn {
-  background: var(--dark2);
-  border: 1.5px solid #2a2a2a;
-  border-radius: 4px;
-  padding: 14px 8px;
-  text-align: center;
-  cursor: pointer;
-  transition: all .15s;
+  background: var(--dark2); border: 1.5px solid #2a2a2a; border-radius: 4px;
+  padding: 14px 8px; text-align: center; cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
-
-.squad-btn:active { transform: scale(0.97); }
-
-.squad-btn.selected {
-  border-color: var(--orange);
-  background: rgba(255,102,0,0.12);
+.squad-btn.sel { border-color: var(--orange); background: rgba(255,102,0,0.12); }
+.sq-name {
+  font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 700;
+  color: var(--white); letter-spacing: 0.5px;
 }
-
-.squad-btn .sq-name {
-  font-family: 'Oswald', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--white);
-  line-height: 1.2;
-  letter-spacing: 0.5px;
+.squad-btn.sel .sq-name { color: var(--orange); }
+.sq-sub {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem;
+  letter-spacing: 1.5px; color: var(--chrome2); text-transform: uppercase; margin-top: 4px;
 }
-
-.squad-btn.selected .sq-name { color: var(--orange); }
-
-.squad-btn .sq-sub {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.7rem;
-  letter-spacing: 1.5px;
-  color: var(--chrome2);
-  text-transform: uppercase;
-  margin-top: 4px;
+.squad-btn.sel .sq-sub { color: var(--orange); opacity: .7; }
+.start-btn {
+  width: 100%; background: linear-gradient(135deg, var(--orange2), var(--orange3));
+  border: none; border-radius: 3px; padding: 15px;
+  color: #000; font-family: 'Oswald', sans-serif; font-size: 1.1rem;
+  font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
 }
-
-.squad-btn.selected .sq-sub { color: var(--orange); opacity: .7; }
-
-.start-quiz-btn {
-  width: 100%;
-  background: linear-gradient(135deg, var(--orange2) 0%, var(--orange3) 100%);
-  border: none;
-  border-radius: 3px;
-  padding: 15px;
-  color: #000;
-  font-family: 'Oswald', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  cursor: pointer;
-  box-shadow: 0 4px 20px rgba(255,102,0,0.35);
-  transition: opacity .2s, transform .1s;
-}
-
-.start-quiz-btn:disabled {
-  opacity: .35;
-  cursor: default;
-  box-shadow: none;
-}
-
-.start-quiz-btn:active { transform: scale(0.98); }
-
-.squad-note {
-  font-size: 0.75rem;
-  color: var(--chrome2);
-  text-align: center;
-  margin-top: 12px;
-  letter-spacing: 0.5px;
-}
-
-#quiz-main { display: none; }
-
+.start-btn:disabled { opacity: .35; }
+.squad-note { font-size: 0.75rem; color: var(--chrome2); text-align: center; margin-top: 10px; }
 </style>
 </head>
 <body>
 
-<!-- SCHERMATA SELEZIONE SQUADRA -->
 <div id="squad-screen">
 <header>
   <div class="header-row">
@@ -605,28 +539,18 @@ main {
   </div>
   <div class="header-stripe"></div>
 </header>
-<main style="padding:16px; max-width:520px; margin:0 auto;">
-  <div class="squad-section-title">Seleziona la tua squadra</div>
-  <div class="squad-grid" id="squadGrid">
-    <div class="squad-btn" onclick="selectSquadra('S1', this)">
-      <div class="sq-name">S1 - 100 TORRI</div>
-      <div class="sq-sub">Percorso 1</div>
-    </div>
-    <div class="squad-btn" onclick="selectSquadra('S7', this)">
-      <div class="sq-name">S7 - GATE 32</div>
-      <div class="sq-sub">Percorso 1</div>
-    </div>
-    <div class="squad-btn" onclick="selectSquadra('S8', this)">
-      <div class="sq-name">S8 - GATE 32</div>
-      <div class="sq-sub">Percorso 1</div>
-    </div>
+<div class="squad-wrap">
+  <div class="squad-label">Seleziona la tua squadra</div>
+  <div class="squad-grid">
+    <div class="squad-btn" onclick="selSq('S1',this)"><div class="sq-name">S1 - 100 TORRI</div><div class="sq-sub">Percorso 1</div></div>
+    <div class="squad-btn" onclick="selSq('S7',this)"><div class="sq-name">S7 - GATE 32</div><div class="sq-sub">Percorso 1</div></div>
+    <div class="squad-btn" onclick="selSq('S8',this)"><div class="sq-name">S8 - GATE 32</div><div class="sq-sub">Percorso 1</div></div>
   </div>
-  <button class="start-quiz-btn" id="startBtn" onclick="startQuiz()" disabled>&#x21A6; Inizia il Quiz</button>
+  <button class="start-btn" id="startBtn" onclick="goQuiz()" disabled>&#x21A6; Inizia il Quiz</button>
   <p class="squad-note">La squadra viene ricordata per tutta la gara</p>
-</main>
-</div><!-- /squad-screen -->
+</div>
+</div>
 
-<!-- QUIZ PRINCIPALE -->
 <div id="quiz-main">
 <div class="progress-section">
   <div class="progress-meta">
@@ -675,136 +599,48 @@ CONFIG.minCorrect = CONFIG.questions.length;
 function decodeAnswer(c) { return parseInt(atob(c), 10) - 7; }
 // ============================================================
 
-// ══════════════ GESTIONE SQUADRA ══════════════
-let selectedSquadra = null;
-let startTime = null;
-let erroriTotali = 0;
+// ══ SQUADRA ══
+var sqSel = null;
+var tStart = null;
+var nErr = 0;
 
-function selectSquadra(sq, btn) {
-  document.querySelectorAll('.squad-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  selectedSquadra = sq;
-  try { localStorage.setItem('svalvolati_squadra', sq); } catch {}
-  const startBtn = document.getElementById('startBtn');
-  startBtn.disabled = false;
-  startBtn.style.opacity = '1';
-  startBtn.style.boxShadow = '0 4px 20px rgba(255,102,0,0.5)';
+function selSq(sq, btn) {
+  document.querySelectorAll('.squad-btn').forEach(function(b) { b.classList.remove('sel'); });
+  btn.classList.add('sel');
+  sqSel = sq;
+  document.getElementById('startBtn').disabled = false;
 }
 
-function startQuiz() {
-  if (!selectedSquadra) {
-    alert('Seleziona prima la tua squadra!');
-    return;
-  }
+function goQuiz() {
+  if (!sqSel) return;
   document.getElementById('squad-screen').style.display = 'none';
   document.getElementById('quiz-main').style.display = 'block';
-  startTime = Date.now();
-  erroriTotali = 0;
+  tStart = Date.now();
+  nErr = 0;
   renderQuestions();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo(0, 0);
 }
 
 async function saveResult(errori) {
-  const secondi = startTime ? Math.round((Date.now() - startTime) / 1000) : 0;
-  const score = Math.max(0, Math.round(1000 - errori * 100 - secondi * 0.05));
-  const ora = new Date().toLocaleTimeString('it-IT', {hour:'2-digit', minute:'2-digit'});
-  const nuovoRisultato = {
-    squadra: selectedSquadra, percorso: 1, checkpoint: 3,
-    errori, secondi, score, ora, timestamp: new Date().toISOString()
-  };
-
+  var sec = tStart ? Math.round((Date.now() - tStart) / 1000) : 0;
+  var score = Math.max(0, Math.round(1000 - errori * 100 - sec * 0.05));
+  var ora = new Date().toLocaleTimeString('it-IT', {hour:'2-digit', minute:'2-digit'});
+  var r = {squadra: sqSel, percorso: 1, checkpoint: 3, errori: errori, secondi: sec, score: score, ora: ora, timestamp: new Date().toISOString()};
+  try { var s = JSON.parse(localStorage.getItem('sv1') || '[]'); s.push(r); localStorage.setItem('sv1', JSON.stringify(s)); } catch(e) {}
   try {
-    const stored = JSON.parse(localStorage.getItem('svalvolati_v1') || '[]');
-    stored.push(nuovoRisultato);
-    localStorage.setItem('svalvolati_v1', JSON.stringify(stored));
-  } catch {}
-
-  try {
-    const _o = 'DhhLDhsaDnlAXXxNGhpkQVp7bGBAfH1eHW9zWE9lYFAETUZJXkBaSR9jT2B8YHBPGWVsRUx5bEJsZ0Nt';
-    const _x = 42;
-    const _b = atob(_o);
-    let _k = '';
-    for (let i = 0; i < _b.length; i++) _k += String.fromCharCode(_b.charCodeAt(i) ^ _x);
-    const _id = '6a4c2016f5f4af5e29693902' + '6a4c2016f5f4af5e29693902';
-    const _h = {'X-Master-Key': _k, 'Content-Type': 'application/json'};
-    const _u = 'https://api.jsonbin.io/v3/b/' + _id;
-    const _g = await fetch(_u + '/latest', {headers: _h});
-    const _d = await _g.json();
-    const _c = _d.record;
-    _c.risultati.push(nuovoRisultato);
-    _c.ultimo_aggiornamento = new Date().toISOString();
-    await fetch(_u, {method: 'PUT', headers: _h, body: JSON.stringify(_c)});
-    console.log('JSONBin OK');
-  } catch(e) {
-    console.warn('Errore JSONBin:', e);
-  }
-});
-  const nuovoRisultato = {
-    squadra: selectedSquadra, percorso: 1, checkpoint: 3,
-    errori, secondi, score, ora, timestamp: new Date().toISOString()
-  };
-
-  // Backup locale
-  try {
-    const stored = JSON.parse(localStorage.getItem('svalvolati_v1') || '[]');
-    stored.push(nuovoRisultato);
-    localStorage.setItem('svalvolati_v1', JSON.stringify(stored));
-  } catch {}
-
-  // Invia a JSONBin
-  try {
-    const _k = ['JDJhJD','EwJFNq','d1ZnMD','BOa3BR','RkpqVl','d0N0VZ','cmVPSn','ouZ2xj','dGpwYz','VJZUpW','SlplM0','9Gb2ZT','RmhGTW','lH'];
-    const _key = atob(_k.join(''));
-    const BIN_ID = '6a4c2016f5f4af5e296939026a4c2016f5f4af5e29693902';
-    const headers = {'X-Master-Key': _key, 'Content-Type': 'application/json'};
-
-    // Leggo i dati attuali
-    const getResp = await fetch('https://api.jsonbin.io/v3/b/' + BIN_ID + '/latest', {headers});
-    const getData = await getResp.json();
-    const current = getData.record;
-
-    // Aggiungo il nuovo risultato
-    current.risultati.push(nuovoRisultato);
-    current.ultimo_aggiornamento = new Date().toISOString();
-
-    // Salvo
-    await fetch('https://api.jsonbin.io/v3/b/' + BIN_ID, {
-      method: 'PUT',
-      headers,
-      body: JSON.stringify(current)
-    });
-    console.log('Salvato su JSONBin OK');
-  } catch(e) {
-    console.warn('Errore JSONBin, solo locale:', e);
-  }
-});
-  const nuovoRisultato = {
-    squadra: selectedSquadra, percorso: 1, checkpoint: 3,
-    errori, secondi, score, ora,
-    timestamp: new Date().toISOString()
-  };
-
-  // Salva anche in locale come backup
-  try {
-    const stored = JSON.parse(localStorage.getItem('svalvolati_v1') || '[]');
-    stored.push(nuovoRisultato);
-    localStorage.setItem('svalvolati_v1', JSON.stringify(stored));
-  } catch {}
-
+    var _o = 'DhhLDhsaDnlAXXxNGhpkQVp7bGBAfH1eHW9zWE9lYFAETUZJXkBaSR9jT2B8YHBPGWVsRUx5bEJsZ0Nt';
+    var _b = atob(_o); var _k = '';
+    for (var i=0;i<_b.length;i++) _k += String.fromCharCode(_b.charCodeAt(i)^42);
+    var _id = '6a4c2016f5f4af5e29693902' + '6a4c2016f5f4af5e29693902';
+    var _h = {'X-Master-Key': _k, 'Content-Type': 'application/json'};
+    var g = await fetch('https://api.jsonbin.io/v3/b/'+_id+'/latest', {headers:_h});
+    var d = await g.json(); var c = d.record;
+    c.risultati.push(r); c.ultimo_aggiornamento = new Date().toISOString();
+    await fetch('https://api.jsonbin.io/v3/b/'+_id, {method:'PUT', headers:_h, body:JSON.stringify(c)});
+  } catch(e) { console.warn('JSONBin err:', e); }
 }
 
-(function() {
-  try {
-    const sq = localStorage.getItem('svalvolati_squadra');
-    if (sq) {
-      const btn = [...document.querySelectorAll('.squad-btn')]
-        .find(b => b.querySelector('.sq-name') && b.querySelector('.sq-name').textContent.trim() === sq);
-      if (btn) selectSquadra(sq, btn);
-    }
-  } catch {}
-})();
-
-// ══════════════ QUIZ ══════════════
+// ══ QUIZ ══
 const letters = ['A','B','C','D'];
 let answered = [];
 let answeredCount = 0;
@@ -840,7 +676,7 @@ function answer(qi, oi) {
   const isCorrect = oi === decodeAnswer(CONFIG.questions[qi].c);
   answered[qi] = isCorrect;
   answeredCount++;
-  if (!isCorrect) erroriTotali++;
+  if (!isCorrect) nErr++;
 
   const card = document.getElementById(`card-${qi}`);
   card.classList.add(isCorrect ? 'answered-correct' : 'answered-wrong');
@@ -870,7 +706,7 @@ function updateProgress() {
 function showResult() {
   const correct = answered.filter(Boolean).length;
   const success = correct >= CONFIG.minCorrect;
-  if (success) saveResult(erroriTotali);
+  if (success) saveResult(nErr);
   const sec = document.getElementById('result-section');
   sec.style.display = 'block';
 
@@ -913,14 +749,14 @@ function showResult() {
 }
 
 function resetQuiz() {
-  answered = []; answeredCount = 0; erroriTotali = 0;
+  answered = []; answeredCount = 0;
   document.getElementById('result-section').style.display = 'none';
   document.getElementById('result-section').innerHTML = '';
   renderQuestions();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// renderQuestions() viene chiamato da startQuiz()
+// Quiz parte da goQuiz()
 </script>
 </div><!-- /quiz-main -->
 </body>
