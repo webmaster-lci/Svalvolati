@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Classifica Live — Svalvolati On The Road</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Barlow:wght@400;600;700&family=Barlow+Condensed:wght@700;800&display=swap');
+
+:root {
+  --black:   #0a0a0a;
+  --dark:    #111111;
+  --dark2:   #1a1a1a;
+  --dark3:   #222222;
+  --orange:  #ff6600;
+  --orange2: #ff8c00;
+  --orange3: #ffaa33;
+  --chrome:  #c0c0c0;
+  --chrome2: #888888;
+  --white:   #f0f0f0;
+  --green:   #4caf50;
+  --red:     #e53935;
+  --gold:    #c9921a;
+  --silver:  #888888;
+  --bronze:  #a0522d;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+header {
+  background: var(--dark);
+  border-bottom: 3px solid var(--orange);
+  padding: 20px 20px 22px;
+}
+
+.header-stripe {
+  height: 4px;
+  background: linear-gradient(90deg, var(--orange2), var(--orange3), var(--orange2));
+  background-size: 200%;
+  animation: shimmer 3s infinite linear;
+}
+
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+header h1 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--white);
+}
+header h1 span { color: var(--orange); }
+.header-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  color: var(--chrome2);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ── STATUS BAR ── */
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: var(--dark2);
+  border-bottom: 1px solid #2a2a2a;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  color: var(--chrome2);
+  text-transform: uppercase;
+}
+
+.status-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  display: inline-block;
+  margin-right: 6px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+/* ── MAIN ── */
+main { padding: 20px 16px 60px; max-width: 600px; margin: 0 auto; }
+
+/* ── CARDS SQUADRA ── */
+.rank-card {
+  background: var(--dark2);
+  border: 1px solid #2a2a2a;
+  border-left: 4px solid var(--chrome2);
+  border-radius: 4px;
+  padding: 16px 18px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  animation: slideIn .4s ease backwards;
+}
+
+@keyframes slideIn { from{opacity:0;transform:translateX(-10px)} to{opacity:1;transform:translateX(0)} }
+
+.rank-card.pos-1 { border-left-color: var(--gold); }
+.rank-card.pos-2 { border-left-color: var(--silver); }
+.rank-card.pos-3 { border-left-color: var(--bronze); }
+
+.rank-pos {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  width: 36px;
+  text-align: center;
+  flex-shrink: 0;
+  color: var(--chrome2);
+}
+.rank-card.pos-1 .rank-pos { color: var(--gold); }
+.rank-card.pos-2 .rank-pos { color: var(--silver); }
+.rank-card.pos-3 .rank-pos { color: var(--bronze); }
+
+.rank-info { flex: 1; min-width: 0; }
+.rank-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 1px;
+}
+.rank-percorso {
+  display: inline-block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--orange);
+  background: rgba(255,102,0,0.12);
+  border: 1px solid rgba(255,102,0,0.3);
+  border-radius: 2px;
+  padding: 1px 6px;
+  margin-left: 8px;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+.rank-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  color: var(--chrome2);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+.rank-sub span { color: var(--orange); margin-right: 10px; }
+
+.rank-score {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--orange);
+  flex-shrink: 0;
+}
+.rank-score small {
+  font-size: 0.65rem;
+  color: var(--chrome2);
+  display: block;
+  text-align: right;
+  margin-top: 2px;
+  letter-spacing: 1px;
+}
+
+/* ── SECTION HEADER ── */
+.section-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--orange);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #2a2a2a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ── STORICO ── */
+.log-section { margin-top: 28px; }
+.log-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #1a1a1a;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: .5px;
+  color: var(--chrome2);
+}
+.log-sq { font-weight: 700; color: var(--white); min-width: 36px; }
+.log-cp { color: var(--orange); min-width: 72px; }
+.log-score { color: var(--orange3); margin-left: auto; font-weight: 700; }
+.log-time { color: #444; font-size: 0.72rem; }
+
+/* ── EMPTY ── */
+.empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--chrome2);
+}
+.empty-icon { font-size: 3rem; margin-bottom: 12px; display: block; }
+.empty-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+/* ── FORMULA ── */
+.formula-box {
+  background: var(--dark2);
+  border: 1px solid #2a2a2a;
+  border-radius: 4px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 1px;
+  color: var(--chrome2);
+  text-transform: uppercase;
+}
+.formula-box strong { color: var(--orange); }
+
+/* ── REFRESH BTN ── */
+.refresh-btn {
+  background: var(--dark2);
+  border: 1px solid #2a2a2a;
+  border-radius: 3px;
+  padding: 4px 12px;
+  color: var(--chrome2);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.refresh-btn:hover { border-color: var(--orange); color: var(--orange); }
+
+/* ── CHROME BAR ── */
+.chrome-bar {
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--chrome), var(--chrome2), var(--chrome), transparent);
+  margin-top: 32px;
+  opacity: 0.3;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Svalvolati <span>On The Road</span></h1>
+  <div class="header-sub">Classifica Live · Harley-Davidson Quiz</div>
+</header>
+<div class="header-stripe"></div>
+
+<div class="status-bar">
+  <div><span class="status-dot"></span> Live</div>
+  <div id="lastUpdate">In attesa di dati...</div>
+  <button class="refresh-btn" onclick="loadData()">↻ Aggiorna</button>
+</div>
+
+<main>
+  <div class="formula-box">
+    Formula punteggio:
+    <strong>1000 − (errori × 100) − (secondi × 0.05)</strong> per checkpoint · I punti si sommano
+  </div>
+
+  <div class="section-label">
+    <span>Classifica Generale</span>
+    <span id="tot-squadre" style="color:var(--chrome2)"></span>
+  </div>
+  <div id="rankList">
+    <div class="empty">
+      <span class="empty-icon">🏍️</span>
+      <div class="empty-title">Gara non ancora iniziata</div>
+      <div style="font-size:0.85rem;">I risultati appariranno qui non appena le squadre inizieranno a completare i checkpoint.</div>
+    </div>
+  </div>
+
+  <div class="log-section">
+    <div class="section-label">
+      <span>Ultimi Checkpoint</span>
+      <span id="tot-cp" style="color:var(--chrome2)"></span>
+    </div>
+    <div id="logList">
+      <div style="color:#333; font-size:0.8rem; font-family:'Barlow Condensed'; letter-spacing:1px;">Nessun checkpoint ancora registrato.</div>
+    </div>
+  </div>
+
+  <div class="chrome-bar"></div>
+</main>
+
+<script>
+const _a = ['Z2h','wX2J','GdXB','GT2J','Icm','F4Y2','xwOW','ZIc0','xPZW','5OTE','phNj','lmaTF','pZUxG','eQ=='];
+const _t = () => atob(_a.join(''));
+const API_URL = 'https://api.github.com/repos/webmaster-lci/Svalvolati/contents/risultati.json';
+
+const SQUADRE_PERCORSO = {
+  'S1':1,'S7':1,'S8':1,
+  'S2':2,'S3':2,'S9':2,
+  'S5':3,'S10':3,
+  'S12':4,'S6':4,
+  'S13':5,'S11':5,
+  'S4':6,'S14':6
+};
+
+async function loadData() {
+  try {
+    const resp = await fetch(API_URL, {
+      headers: { 'Authorization': 'token ' + _t(), 'User-Agent': 'Svalvolati', 'Cache-Control': 'no-cache' }
+    });
+    const data = await resp.json();
+    const json = JSON.parse(atob(data.content.replace(/\n/g, '')));
+    renderClassifica(json);
+    renderLog(json);
+
+    const dt = json.ultimo_aggiornamento
+      ? new Date(json.ultimo_aggiornamento).toLocaleTimeString('it-IT', {hour:'2-digit',minute:'2-digit',second:'2-digit'})
+      : '—';
+    document.getElementById('lastUpdate').textContent = 'Aggiornato: ' + dt;
+  } catch(e) {
+    document.getElementById('lastUpdate').textContent = 'Errore di connessione';
+    console.error(e);
+  }
+}
+
+function renderClassifica(json) {
+  const risultati = json.risultati || [];
+  const totals = {};
+  const cpCounts = {};
+  const erroriTot = {};
+
+  risultati.forEach(r => {
+    if (!totals[r.squadra]) { totals[r.squadra] = 0; cpCounts[r.squadra] = 0; erroriTot[r.squadra] = 0; }
+    totals[r.squadra] += r.score;
+    cpCounts[r.squadra]++;
+    erroriTot[r.squadra] += r.errori;
+  });
+
+  const sorted = Object.keys(totals).sort((a,b) => totals[b] - totals[a]);
+  const list = document.getElementById('rankList');
+
+  document.getElementById('tot-squadre').textContent = sorted.length + ' squadre';
+
+  if (sorted.length === 0) {
+    list.innerHTML = `<div class="empty">
+      <span class="empty-icon">🏍️</span>
+      <div class="empty-title">Gara non ancora iniziata</div>
+      <div style="font-size:.85rem;">I risultati appariranno qui non appena le squadre inizieranno a completare i checkpoint.</div>
+    </div>`;
+    return;
+  }
+
+  list.innerHTML = '';
+  sorted.forEach((sq, i) => {
+    const pos = i + 1;
+    const posLabel = pos === 1 ? '🥇' : pos === 2 ? '🥈' : pos === 3 ? '🥉' : pos;
+    const p = SQUADRE_PERCORSO[sq] || '?';
+    const card = document.createElement('div');
+    card.className = 'rank-card pos-' + pos;
+    card.style.animationDelay = (i * 0.05) + 's';
+    card.innerHTML =
+      '<div class="rank-pos">' + posLabel + '</div>' +
+      '<div class="rank-info">' +
+        '<div class="rank-name">' + sq + '<span class="rank-percorso">P' + p + '</span></div>' +
+        '<div class="rank-sub">' +
+          '<span>' + cpCounts[sq] + ' CP</span>' +
+          '<span>' + erroriTot[sq] + ' errori</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="rank-score">' + totals[sq] + '<small>punti</small></div>';
+    list.appendChild(card);
+  });
+}
+
+function renderLog(json) {
+  const risultati = json.risultati || [];
+  const logList = document.getElementById('logList');
+  document.getElementById('tot-cp').textContent = risultati.length + ' checkpoint';
+
+  if (risultati.length === 0) {
+    logList.innerHTML = '<div style="color:#333; font-size:.8rem; font-family:\'Barlow Condensed\'; letter-spacing:1px;">Nessun checkpoint ancora registrato.</div>';
+    return;
+  }
+
+  logList.innerHTML = '';
+  [...risultati].reverse().slice(0, 20).forEach(r => {
+    const row = document.createElement('div');
+    row.className = 'log-row';
+    const mm = String(Math.floor(r.secondi/60)).padStart(2,'0');
+    const ss = String(r.secondi % 60).padStart(2,'0');
+    row.innerHTML =
+      '<span class="log-sq">' + r.squadra + '</span>' +
+      '<span class="log-cp">P' + r.percorso + ' · CP' + r.checkpoint + '</span>' +
+      '<span>' + r.errori + ' err · ' + mm + ':' + ss + '</span>' +
+      '<span class="log-score">' + r.score + ' pt</span>' +
+      '<span class="log-time">' + r.ora + '</span>';
+    logList.appendChild(row);
+  });
+}
+
+// Carica subito e poi ogni 30 secondi
+loadData();
+setInterval(loadData, 30000);
+</script>
+</body>
+</html>
