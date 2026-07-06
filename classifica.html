@@ -416,7 +416,7 @@ function renderLog(json) {
     const mm = String(Math.floor(r.secondi/60)).padStart(2,'0');
     const ss = String(r.secondi % 60).padStart(2,'0');
     row.innerHTML =
-      '<span class="log-sq">' + r.squadra + '</span>' +
+      '<span class="log-sq">' + r.squadra + (SQUADRE_DESC[r.squadra] ? ' <span style="color:#f0f0f0;font-weight:400;font-size:.8rem;">- ' + SQUADRE_DESC[r.squadra] + '</span>' : '') + '</span>' +
       '<span class="log-cp">P' + r.percorso + ' · CP' + r.checkpoint + '</span>' +
       '<span>' + r.errori + ' err · ' + mm + ':' + ss + '</span>' +
       '<span class="log-score">' + r.score + ' pt</span>' +
