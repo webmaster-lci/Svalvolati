@@ -331,7 +331,10 @@ const SQUADRE_PERCORSO = {
 async function loadData() {
   try {
     const resp = await fetch(BIN_URL + '?t=' + Date.now(), {
-      headers: {'X-Master-Key': _key()}
+      headers: {
+        'X-Master-Key': _key(),
+        'X-Access-Key': _key()
+      }
     });
     const data = await resp.json();
     const json = data.record;
