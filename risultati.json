@@ -1,4 +1,15 @@
 {
-  "risultati": [],
-  "ultimo_aggiornamento": ""
+  "risultati": [
+    {
+      "squadra": "S1",
+      "percorso": 1,
+      "checkpoint": 3,
+      "errori": 0,
+      "secondi": 10,
+      "score": 1000,
+      "ora": "22:45",
+      "timestamp": "2026-07-06T20:45:15.391Z"
+    }
+  ],
+  "ultimo_aggiornamento": "2026-07-06T20:45:15.919Z"
 }
