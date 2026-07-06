@@ -327,6 +327,14 @@ const SQUADRE_PERCORSO = {
   'S13':5,'S11':5,
   'S4':6,'S14':6
 };
+const SQUADRE_DESC = {
+  'S1':'100 Torri','S7':'Gate 32','S8':'Gate 32',
+  'S2':'100 Torri','S3':'Legnano','S9':'Gate 32',
+  'S5':'100 Torri','S10':'Varese',
+  'S12':'Bergamo','S6':'100 Torri',
+  'S13':'Bergamo','S11':'100 Torri',
+  'S4':'Legnano','S14':'Gate 32'
+};
 
 async function loadData() {
   try {
@@ -383,7 +391,7 @@ function renderClassifica(json) {
     card.innerHTML =
       '<div class="rank-pos">' + posLabel + '</div>' +
       '<div class="rank-info">' +
-        '<div class="rank-name">' + sq + '<span class="rank-percorso">P' + p + '</span></div>' +
+        '<div class="rank-name">' + sq + (SQUADRE_DESC[sq] ? ' <span style="color:#f0f0f0;font-size:.9rem;font-weight:400;">- ' + SQUADRE_DESC[sq] + '</span>' : '') + '<span class="rank-percorso">P' + p + '</span></div>' +
         '<div class="rank-sub"><span>' + cpCounts[sq] + ' CP</span><span>' + erroriTot[sq] + ' errori</span></div>' +
       '</div>' +
       '<div class="rank-score">' + totals[sq] + '<small>punti</small></div>';
