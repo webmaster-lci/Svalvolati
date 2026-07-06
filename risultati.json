@@ -19,7 +19,17 @@
       "score": 1000,
       "ora": "00:47",
       "timestamp": "2026-07-06T22:47:06.698Z"
+    },
+    {
+      "squadra": "S8",
+      "percorso": 1,
+      "checkpoint": 3,
+      "errori": 1,
+      "secondi": 23,
+      "score": 899,
+      "ora": "00:54",
+      "timestamp": "2026-07-06T22:54:41.686Z"
     }
   ],
-  "ultimo_aggiornamento": "2026-07-06T22:47:07.101Z"
+  "ultimo_aggiornamento": "2026-07-06T22:54:42.067Z"
 }
