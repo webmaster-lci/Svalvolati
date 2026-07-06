@@ -685,11 +685,17 @@ function selectSquadra(sq, btn) {
   btn.classList.add('selected');
   selectedSquadra = sq;
   try { localStorage.setItem('svalvolati_squadra', sq); } catch {}
-  document.getElementById('startBtn').disabled = false;
+  const startBtn = document.getElementById('startBtn');
+  startBtn.disabled = false;
+  startBtn.style.opacity = '1';
+  startBtn.style.boxShadow = '0 4px 20px rgba(255,102,0,0.5)';
 }
 
 function startQuiz() {
-  if (!selectedSquadra) return;
+  if (!selectedSquadra) {
+    alert('Seleziona prima la tua squadra!');
+    return;
+  }
   document.getElementById('squad-screen').style.display = 'none';
   document.getElementById('quiz-main').style.display = 'block';
   startTime = Date.now();
