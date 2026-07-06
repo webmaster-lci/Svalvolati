@@ -331,11 +331,15 @@ const SQUADRE_PERCORSO = {
 async function loadData() {
   try {
     const resp = await fetch(BIN_URL + '?t=' + Date.now(), {
+      method: 'GET',
+      mode: 'cors',
       headers: {
         'X-Master-Key': _key(),
-        'X-Access-Key': _key()
+        'X-Access-Key': _key(),
+        'Content-Type': 'application/json'
       }
     });
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
     const data = await resp.json();
     const json = data.record;
     renderClassifica(json);
