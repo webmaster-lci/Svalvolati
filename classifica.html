@@ -330,17 +330,12 @@ const SQUADRE_PERCORSO = {
 
 async function loadData() {
   try {
-    const resp = await fetch(BIN_URL + '?t=' + Date.now(), {
-      method: 'GET',
-      mode: 'cors',
-      headers: {
-        'X-Master-Key': _key(),
-        'X-Access-Key': _key(),
-        'Content-Type': 'application/json'
-      }
-    });
+    // Uso allorigins come proxy per evitare CORS su Safari/iPhone
+    const target = encodeURIComponent(BIN_URL + '?t=' + Date.now());
+    const resp = await fetch('https://api.allorigins.win/get?url=' + target);
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
-    const data = await resp.json();
+    const wrapper = await resp.json();
+    const data = JSON.parse(wrapper.contents);
     const json = data.record;
     renderClassifica(json);
     renderLog(json);
