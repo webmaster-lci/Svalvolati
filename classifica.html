@@ -330,8 +330,8 @@ const SQUADRE_PERCORSO = {
 
 async function loadData() {
   try {
-    const rawUrl = 'https://raw.githubusercontent.com/webmaster-lci/Svalvolati/main/risultati.json?t=' + Date.now();
-    const resp = await fetch(rawUrl, {cache: 'no-store'});
+    const rawUrl = 'https://raw.githubusercontent.com/webmaster-lci/Svalvolati/main/risultati.json?nocache=' + Date.now() + '&r=' + Math.random();
+    const resp = await fetch(rawUrl, {cache: 'no-store', headers: {'Cache-Control': 'no-cache, no-store, must-revalidate', 'Pragma': 'no-cache'}});
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     const json = await resp.json();
     renderClassifica(json);
