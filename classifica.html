@@ -314,9 +314,9 @@ main { padding: 20px 16px 60px; max-width: 600px; margin: 0 auto; }
 </main>
 
 <script>
-const _a = ['Z2h','wX2J','GdXB','GT2J','Icm','F4Y2','xwOW','ZIc0','xPZW','5OTE','phNj','lmaTF','pZUxG','eQ=='];
-const _t = () => atob(_a.join(''));
-const API_URL = 'https://api.github.com/repos/webmaster-lci/Svalvolati/contents/risultati.json';
+const _k = ['JDJhJD','EwJFNq','d1ZnMD','BOa3BR','RkpqVl','d0N0VZ','cmVPSn','ouZ2xj','dGpwYz','VJZUpW','SlplM0','9Gb2ZT','RmhGTW','lH'];
+const _key = () => atob(_k.join(''));
+const BIN_URL = 'https://api.jsonbin.io/v3/b/6a4c2016f5f4af5e296939026a4c2016f5f4af5e29693902/latest';
 
 const SQUADRE_PERCORSO = {
   'S1':1,'S7':1,'S8':1,
@@ -329,14 +329,13 @@ const SQUADRE_PERCORSO = {
 
 async function loadData() {
   try {
-    const resp = await fetch(API_URL, {
-      headers: { 'Authorization': 'token ' + _t(), 'User-Agent': 'Svalvolati', 'Cache-Control': 'no-cache' }
+    const resp = await fetch(BIN_URL + '?t=' + Date.now(), {
+      headers: {'X-Master-Key': _key()}
     });
     const data = await resp.json();
-    const json = JSON.parse(atob(data.content.replace(/\n/g, '')));
+    const json = data.record;
     renderClassifica(json);
     renderLog(json);
-
     const dt = json.ultimo_aggiornamento
       ? new Date(json.ultimo_aggiornamento).toLocaleTimeString('it-IT', {hour:'2-digit',minute:'2-digit',second:'2-digit'})
       : '—';
@@ -362,7 +361,6 @@ function renderClassifica(json) {
 
   const sorted = Object.keys(totals).sort((a,b) => totals[b] - totals[a]);
   const list = document.getElementById('rankList');
-
   document.getElementById('tot-squadre').textContent = sorted.length + ' squadre';
 
   if (sorted.length === 0) {
@@ -386,10 +384,7 @@ function renderClassifica(json) {
       '<div class="rank-pos">' + posLabel + '</div>' +
       '<div class="rank-info">' +
         '<div class="rank-name">' + sq + '<span class="rank-percorso">P' + p + '</span></div>' +
-        '<div class="rank-sub">' +
-          '<span>' + cpCounts[sq] + ' CP</span>' +
-          '<span>' + erroriTot[sq] + ' errori</span>' +
-        '</div>' +
+        '<div class="rank-sub"><span>' + cpCounts[sq] + ' CP</span><span>' + erroriTot[sq] + ' errori</span></div>' +
       '</div>' +
       '<div class="rank-score">' + totals[sq] + '<small>punti</small></div>';
     list.appendChild(card);
@@ -402,7 +397,7 @@ function renderLog(json) {
   document.getElementById('tot-cp').textContent = risultati.length + ' checkpoint';
 
   if (risultati.length === 0) {
-    logList.innerHTML = '<div style="color:#333; font-size:.8rem; font-family:\'Barlow Condensed\'; letter-spacing:1px;">Nessun checkpoint ancora registrato.</div>';
+    logList.innerHTML = '<div style="color:#333;font-size:.8rem;font-family:'Barlow Condensed';letter-spacing:1px;">Nessun checkpoint ancora registrato.</div>';
     return;
   }
 
@@ -422,7 +417,6 @@ function renderLog(json) {
   });
 }
 
-// Carica subito e poi ogni 30 secondi
 loadData();
 setInterval(loadData, 30000);
 </script>
