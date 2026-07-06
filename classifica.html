@@ -317,7 +317,7 @@ main { padding: 20px 16px 60px; max-width: 600px; margin: 0 auto; }
 const _o = 'DhhLDhsaDnlAXXxNGhpkQVp7bGBAfH1eHW9zWE9lYFAETUZJXkBaSR9jT2B8YHBPGWVsRUx5bEJsZ0Nt';
 const _x = 42;
 const _key = () => { const _b = atob(_o); let _k = ''; for (let i=0;i<_b.length;i++) _k+=String.fromCharCode(_b.charCodeAt(i)^_x); return _k; };
-const BIN_URL = 'https://api.jsonbin.io/v3/b/6a4c2016f5f4af5e29693902/latest';
+const BIN_URL = 'https://api.jsonbin.io/v3/b/6a4c2c47f5f4af5e296963bc/latest';
 
 const SQUADRE_PERCORSO = {
   'S1':1,'S7':1,'S8':1,
@@ -330,12 +330,9 @@ const SQUADRE_PERCORSO = {
 
 async function loadData() {
   try {
-    // Uso allorigins come proxy per evitare CORS su Safari/iPhone
-    const target = encodeURIComponent(BIN_URL + '?t=' + Date.now());
-    const resp = await fetch('https://api.allorigins.win/get?url=' + target);
+    const resp = await fetch(BIN_URL + '?t=' + Date.now());
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
-    const wrapper = await resp.json();
-    const data = JSON.parse(wrapper.contents);
+    const data = await resp.json();
     const json = data.record;
     renderClassifica(json);
     renderLog(json);
